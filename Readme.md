@@ -60,10 +60,3 @@ DeepShield is a cutting-edge web application designed to detect deepfake videos 
 * **Backend:** Python, Flask / FastAPI
 * **Machine Learning:** PyTorch / TensorFlow, OpenCV, Facial Landmark Models
 
-## 📦 Local Setup & Execution
-
-Since this project is set up locally in your environment, follow these steps to run it:
-
-1. **Navigate to the Project Directory**
-   ```bash
-   cd C:\DeepShield\Deepfake_Detection
