@@ -1,4 +1,4 @@
-﻿"""
+"""
 Application configuration using pydantic-settings.
 Reads from .env but silently ignores unknown keys so a messy hackathon
 .env file never crashes startup.
@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     MAX_UPLOAD_SIZE_MB: int = 50
 
     # --- ML / Video processing ---
-    MAX_FRAMES_TO_PROCESS: int = 250          # hard cap (~10s @ 25fps)
+    MAX_FRAMES_TO_PROCESS: int = 1000         # hard cap (~40s @ 25fps)
     TARGET_FPS_SAMPLE: int = 25
     FRAME_SCORE_CHART_CAP: int = 100          # cap array size returned to frontend
     MANIPULATION_THRESHOLD: float = 55.0      # confidence % above which -> deepfake
@@ -49,7 +49,7 @@ class Settings(BaseSettings):
 
     # --- Deep learning model paths ---
     MODEL_DIR: str = "models"
-    SYNCNET_TORCH_PATH: str = "models/syncnet_color.pth"
+    SYNCNET_TORCH_PATH: str = "models/syncnet_v2.model"
     SYNCNET_VISUAL_ONNX: str = "models/syncnet_visual.onnx"
     SYNCNET_AUDIO_ONNX: str = "models/syncnet_audio.onnx"
     INFERENCE_BACKEND: str = "auto"   # "auto" | "onnx" | "torch" | "mock"

@@ -24,10 +24,10 @@ export default function LockedGate({ pageTitle = "This Section" }) {
             {pageTitle} is Locked
           </h2>
           <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            Yeh section new users ke liye locked hai. Is feature ko unlock karne ke liye pehle video upload karke detection run karein ya temporal assessment karein.
+            This module is currently locked for new sessions. To unlock full forensic capabilities, please upload and analyze a video on the primary detector first.
           </p>
           <p className="text-xs text-slate-500 dark:text-slate-400">
-            Jaise hi aapka video analyze ho jaayega, yahan forensic logs, audit report aur overview automatically unlock ho jaayenge.
+            Once a video has been analyzed, multimodal biometric logs, comprehensive audit reports, and temporal charts will automatically unlock.
           </p>
         </div>
 
@@ -38,7 +38,7 @@ export default function LockedGate({ pageTitle = "This Section" }) {
             className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-purple-600/30 transition-all flex items-center justify-center gap-2 cursor-pointer group"
           >
             <Video className="w-4 h-4 text-purple-200 group-hover:scale-110 transition-transform" />
-            <span>Pehle Video Upload Karo</span>
+            <span>Upload Video to Analyze</span>
           </Link>
 
           <Link

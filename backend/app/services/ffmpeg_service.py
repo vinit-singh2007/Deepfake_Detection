@@ -1,4 +1,4 @@
-﻿"""
+"""
 FFmpeg-based audio extraction service.
 
 Extracts 16kHz mono PCM WAV audio from an uploaded video using subprocess,
@@ -112,6 +112,28 @@ def get_video_duration(video_path: str | Path) -> float:
     except Exception as exc:  # noqa: BLE001 - best-effort, never fatal
         logger.warning("Could not determine video duration: %s", exc)
     return 0.0
+
+
+def normalize_video_fps(video_path: str | Path, target_fps: int = 25) -> Path:
+    """
+    Normalizes video to target_fps (25 fps default) for synchronous SyncNet inference.
+    """
+    video_path = Path(video_path)
+    upload_dir = settings.upload_path
+    normalized_path = upload_dir / f"norm25_{video_path.stem}.mp4"
+    cmd = [
+        settings.FFMPEG_BINARY,
+        "-y",
+        "-i", str(video_path),
+        "-r", str(target_fps),
+        "-c:v", "libx264",
+        "-pix_fmt", "yuv420p",
+        "-an",
+        str(normalized_path),
+    ]
+    logger.info("Normalizing video to %d FPS: %s -> %s", target_fps, video_path.name, normalized_path.name)
+    _run_ffmpeg(cmd)
+    return normalized_path
 
 
 def cleanup_file(path: str | Path) -> None:

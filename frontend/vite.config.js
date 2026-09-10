@@ -9,8 +9,8 @@ export default defineConfig({
     tailwindcss(),
   ],
   server: {
-    host: '0.0.0.0', // Isse localhost aur network access open ho jata hai
+    host: '0.0.0.0', // Enables localhost and network access
     port: 5173,
-    strictPort: true, // Agar port occupied hoga toh error dikha dega
+    strictPort: true, // Fail if port is already occupied
   },
 })

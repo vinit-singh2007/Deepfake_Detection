@@ -79,9 +79,16 @@ async def analyze_video(file: UploadFile = File(...)) -> VideoAnalysisResult:
                 detail=f"Audio extraction failed: {exc}",
             ) from exc
 
-        # --- 3. Run heuristic lip-sync analysis ---
+        # --- 2b. Normalize video to 25 FPS for SyncNet audio-visual alignment ---
+        norm_video_path = temp_video_path
         try:
-            result = ml_service.analyze_lip_sync(temp_video_path, temp_audio_path)
+            norm_video_path = ffmpeg_service.normalize_video_fps(temp_video_path, 25)
+        except Exception as exc:
+            logger.warning("Video FPS normalization failed, continuing with original: %s", exc)
+
+        # --- 3. Run neural lip-sync & forensic analysis ---
+        try:
+            result = ml_service.analyze_lip_sync(norm_video_path, temp_audio_path)
         except ml_service.MLServiceError as exc:
             logger.error("ML analysis failed: %s", exc)
             raise HTTPException(
@@ -102,6 +109,8 @@ async def analyze_video(file: UploadFile = File(...)) -> VideoAnalysisResult:
     finally:
         # --- 4. Always clean up temp files ---
         ffmpeg_service.cleanup_file(temp_video_path)
+        if norm_video_path != temp_video_path:
+            ffmpeg_service.cleanup_file(norm_video_path)
         if temp_audio_path is not None:
             ffmpeg_service.cleanup_file(temp_audio_path)
         await file.close()
