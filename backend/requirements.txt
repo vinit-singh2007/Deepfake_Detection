@@ -1,0 +1,37 @@
+﻿# --- Web framework ---
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+
+# --- Validation / settings ---
+pydantic==2.10.4
+pydantic-settings==2.7.1
+
+# --- Computer vision / numerics ---
+opencv-python-headless==4.10.0.84
+numpy==2.2.1
+scipy==1.14.1
+
+# --- Deep learning inference ---
+onnxruntime==1.20.1
+torch==2.6.0
+
+# --- Audio feature extraction ---
+librosa==0.10.2.post1
+soundfile==0.12.1
+
+# --- MongoDB (async) ---
+motor==3.6.0
+pymongo==4.9.2
+
+# --- Security ---
+passlib[bcrypt]==1.7.4
+bcrypt==4.0.1
+python-jose[cryptography]==3.3.0
+
+# --- Model download utility ---
+requests==2.32.3
+tqdm==4.67.1
+
+# --- Utilities ---
+python-dotenv==1.0.1

@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Smooth transitions on theme switch */
+html {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
